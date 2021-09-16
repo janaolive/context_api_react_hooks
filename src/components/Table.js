@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+// requisto concluido com consulta a: https://pt-br.reactjs.org/docs/hooks-intro.html, dúvidas compartilhadas no Slack e repositorio GitHub.import React, { useContext } from 'react';
+
 import StarWarsContext from '../context/StarWarsContext';
 
 function Table() {

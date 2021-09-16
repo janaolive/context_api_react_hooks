@@ -1,3 +1,5 @@
+// requisto concluido com consulta a: https://pt-br.reactjs.org/docs/hooks-intro.html, dúvidas compartilhadas no Slack e repositorio GitHub.
+
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import StarWarsContext from './StarWarsContext';
