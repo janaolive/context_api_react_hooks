@@ -1,10 +1,10 @@
 // tentei incluir a lógica do filtroaqui também, mas não funciou. Após pesquisa voltei ela para o component Table.
 
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
-  const { data, handleChange } = useContext(StarWarsContext);
+  const handleChange = useContext(StarWarsContext);
 
   return (
     <div>
