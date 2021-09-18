@@ -3,8 +3,14 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Table() {
-  const { data, filters: { filterByName } } = useContext(StarWarsContext);
-  const { name } = filterByName;
+  const {
+    data,
+    filters: {
+      filterByName: {
+        name,
+      },
+    },
+  } = useContext(StarWarsContext);
 
   return (
     <div>

@@ -6,7 +6,10 @@ import StarWarsContext from './StarWarsContext';
 
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
-  const [filters, setFilters] = useState({ filterByName: { name: '' },
+  const [filters, setFilters] = useState({
+    filterByName: {
+      name: '',
+    },
   });
 
   // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
