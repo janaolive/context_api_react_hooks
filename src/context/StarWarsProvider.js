@@ -6,19 +6,32 @@ import StarWarsContext from './StarWarsContext';
 
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
+  const [filters, setFilters] = useState({ filterByName: { name: '' },
+  });
 
-  const fetchPlanets = () => (
-    fetch('https://swapi-trybe.herokuapp.com/api/planets/')
-      .then((response) => response.json())
-      .then((results) => setData([...results.results]))
-  );
-
+  // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
+  // Plantão de revisão com ícaro - 17/09.
   useEffect(() => {
+    async function fetchPlanets() {
+      const { results } = await fetch('https://swapi-trybe.herokuapp.com/api/planets/')
+        .then((response) => response.json());
+      setData([...results]);
+    }
     fetchPlanets();
   }, []);
 
+  // função, estado e contexto concluido após pesquisa no repositorio do colega Matheus Carvalho
+  // https://github.com/tryber/sd-013-b-project-starwars-planets-search/tree/matheuscarvalhoscm-starwars-planets-search/src
+  // porque estava com dificuldades para declarar o estado com duas chaves e passar a informação de lógica para o componente Filter.
+  function handleChange({ target }) {
+    const { value } = target;
+    setFilters({ ...filters, filterByName: { name: value } });
+  }
+
   const contextValue = {
     data,
+    filters,
+    handleChange,
   };
 
   return (
