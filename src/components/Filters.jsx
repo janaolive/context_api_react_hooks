@@ -41,7 +41,7 @@ function Filters() {
           id="search-by-name"
           placeholder="Digite o nome de um planeta"
           type="text"
-          onChange={ ({ target }) => handleChange(target.value) }
+          onChange={ handleChange }
         />
       </label>
 

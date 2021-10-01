@@ -6,6 +6,8 @@ import Table from './components/Table';
 import Filters from './components/Filters';
 import FilterList from './components/FilterList';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <StarWarsProvider>
