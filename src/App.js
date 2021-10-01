@@ -4,11 +4,13 @@ import './App.css';
 import StarWarsProvider from './context/StarWarsProvider';
 import Table from './components/Table';
 import Filters from './components/Filters';
+import FilterList from './components/FilterList';
 
 function App() {
   return (
     <StarWarsProvider>
       <Filters />
+      <FilterList />
       <Table />
     </StarWarsProvider>
   );

@@ -1,24 +1,105 @@
-// tentei incluir a lógica do filtroaqui também, mas não funciou. Após pesquisa voltei ela para o componente
+// tentei incluir a lógica do filtro aqui também, mas não funcionou. Após pesquisa voltei ela para o componente
 
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
-  const { handleChange } = useContext(StarWarsContext);
+  const {
+    data, handleChange, filters, setFilters, optionColumns,
+  } = useContext(StarWarsContext);
+
+  const [objectFilters, setObjectFilters] = useState({
+    column: '',
+    comparison: '',
+    value: '',
+  });
+
+  const handleFilterButton = async () => {
+    await setFilters(
+      { ...filters,
+        filterByNumericValues: [...filters.filterByNumericValues, objectFilters],
+      },
+    );
+  };
+
+  const handleFilter = ({ target }) => {
+    const { name, value } = target;
+    setObjectFilters({ ...objectFilters, [name]: value });
+  };
+
+  // loading
+  if (data === undefined) {
+    return <h3> Carregando... </h3>;
+  }
 
   return (
-    <div>
+    <form>
       <label htmlFor="search-by-name">
         Busca por nome:
         <input
-          id="search-by-name"
-          type="text"
           data-testid="name-filter"
+          id="search-by-name"
           placeholder="Digite o nome de um planeta"
-          onChange={ handleChange }
+          type="text"
+          onChange={ ({ target }) => handleChange(target.value) }
         />
       </label>
-    </div>
+
+      <label htmlFor="option-column">
+        Filtrar por:
+        <select
+          name="column"
+          id="option-column"
+          data-testid="column-filter"
+          onChange={ handleFilter }
+        >
+          {
+            optionColumns.map((option, index) => (
+              <option
+                key={ index }
+                value={ option }
+              >
+                { option }
+              </option>
+            ))
+          }
+        </select>
+      </label>
+
+      <label htmlFor="option-comparison">
+        Comparar por:
+        <select
+          name="comparison"
+          id="option-comparison"
+          data-testid="comparison-filter"
+          onChange={ handleFilter }
+        >
+          <option value="-">-</option>
+          <option value="maior que">maior que</option>
+          <option value="menor que">menor que</option>
+          <option value="igual a">igual a</option>
+        </select>
+      </label>
+
+      <label htmlFor="option-value">
+        Filtrar Valor:
+        <input
+          type="number"
+          name="value"
+          id="option-value"
+          data-testid="value-filter"
+          onChange={ handleFilter }
+        />
+      </label>
+
+      <button
+        type="button"
+        data-testid="button-filter"
+        onClick={ handleFilterButton }
+      >
+        Filtrar
+      </button>
+    </form>
   );
 }
 

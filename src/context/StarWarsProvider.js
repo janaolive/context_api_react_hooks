@@ -6,11 +6,22 @@ import StarWarsContext from './StarWarsContext';
 
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
+
   const [filters, setFilters] = useState({
     filterByName: {
       name: '',
     },
+    filterByNumericValues: [],
   });
+  const [filtered, setFiltered] = useState();
+
+  const [optionColumns, setOptionColumns] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
   // Plantão de revisão com ícaro - 17/09.
@@ -31,9 +42,47 @@ function StarWarsProvider({ children }) {
     setFilters({ ...filters, filterByName: { name: value } });
   }
 
+  useEffect(() => {
+    if (filters.filterByNumericValues.length > 0) {
+      const { column, value, comparison } = filters.filterByNumericValues[0];
+      switch (comparison) {
+      case 'maior que': {
+        const newData = data.filter((option) => Number(option[column]) > Number(value));
+        setData(newData);
+        break;
+      }
+      case 'menor que': {
+        const newData = data.filter((option) => Number(option[column]) < Number(value));
+        setData(newData);
+        break;
+      }
+      case 'igual a': {
+        const newData = data.filter((option) => Number(option[column]) === Number(value));
+        setData(newData);
+        break;
+      }
+      default: console.log('');
+      }
+    }
+  }, [data, filters.filterByNumericValues]);
+
+  // limpar filtros já selecionados - indexof + splice
+  useEffect(() => {
+    const option = optionColumns;
+    filters.filterByNumericValues.forEach(({ column }) => {
+      option.splice(option.indexOf(column), 1);
+      setOptionColumns(option);
+    });
+  }, [optionColumns, filters.filterByNumericValues]);
+
   const contextValue = {
     data,
     filters,
+    filtered,
+    optionColumns,
+    setFilters,
+    setFiltered,
+    setData,
     handleChange,
   };
 
