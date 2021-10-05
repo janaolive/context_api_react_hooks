@@ -29,7 +29,7 @@ function StarWarsProvider({ children }) {
     async function fetchPlanets() {
       const { results } = await fetch('https://swapi-trybe.herokuapp.com/api/planets/')
         .then((response) => response.json());
-      setData([...results]);
+      setData(results);
     }
     fetchPlanets();
   }, []);
