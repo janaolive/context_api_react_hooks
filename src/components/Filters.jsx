@@ -5,7 +5,7 @@ import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
   const {
-    data, handleChange, filters, setFilters, optionColumns,
+    handleOption, handleChange, filters, setFilters, optionColumns,
   } = useContext(StarWarsContext);
 
   const [objectFilters, setObjectFilters] = useState({
@@ -14,12 +14,13 @@ function Filters() {
     value: '',
   });
 
-  const handleFilterButton = async () => {
-    await setFilters(
+  const handleFilterButton = () => {
+    setFilters(
       { ...filters,
         filterByNumericValues: [...filters.filterByNumericValues, objectFilters],
       },
     );
+    handleOption();
   };
 
   const handleFilter = ({ target }) => {
@@ -27,10 +28,10 @@ function Filters() {
     setObjectFilters({ ...objectFilters, [name]: value });
   };
 
-  // loading
-  if (data === undefined) {
-    return <h3> Carregando... </h3>;
-  }
+  // // loading
+  // if (data === undefined) {
+  //   return <h3> Carregando... </h3>;
+  // }
 
   return (
     <form>

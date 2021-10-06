@@ -26,11 +26,12 @@ function StarWarsProvider({ children }) {
   // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
   // Plantão de revisão com ícaro - 17/09.
   useEffect(() => {
-    async function fetchPlanets() {
-      const { results } = await fetch('https://swapi-trybe.herokuapp.com/api/planets/')
-        .then((response) => response.json());
+    const fetchPlanets = async () => {
+      const planets = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
+      const { results } = await planets.json();
       setData(results);
-    }
+      console.log(results);
+    };
     fetchPlanets();
   }, []);
 
@@ -42,7 +43,7 @@ function StarWarsProvider({ children }) {
     setFilters({ ...filters, filterByName: { name: value } });
   }
 
-  useEffect(() => {
+  function handleOption() {
     if (filters.filterByNumericValues.length > 0) {
       const { column, value, comparison } = filters.filterByNumericValues[0];
       switch (comparison) {
@@ -64,7 +65,7 @@ function StarWarsProvider({ children }) {
       default: console.log('');
       }
     }
-  }, [data, filters.filterByNumericValues]);
+  }
 
   // limpar filtros já selecionados - indexof + splice
   useEffect(() => {
@@ -84,6 +85,7 @@ function StarWarsProvider({ children }) {
     setFiltered,
     setData,
     handleChange,
+    handleOption,
   };
 
   return (
