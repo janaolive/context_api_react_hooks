@@ -4,29 +4,21 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import StarWarsContext from './StarWarsContext';
 
+const initialFilters = {
+  filterByName: { name: '' },
+  filterByNumericValues: [],
+  order: {
+    column: 'name',
+    sort: 'ASC',
+  },
+};
+
 function StarWarsProvider({ children }) {
   const [data, setData] = useState([]);
 
-  const [filters, setFilters] = useState({
-    filterByName: {
-      name: '',
-    },
-    filterByNumericValues: [],
-    order: {
-      column: 'name',
-      sort: 'ASC',
-    },
-  });
+  const [filters, setFilters] = useState(initialFilters);
 
   const [filtered, setFiltered] = useState();
-
-  const [optionColumns, setOptionColumns] = useState([
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ]);
 
   // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
   // Plantão de revisão com ícaro - 17/09.
@@ -48,49 +40,15 @@ function StarWarsProvider({ children }) {
     setFilters({ ...filters, filterByName: { name: value } });
   }
 
-  function handleOption() {
-    if (filters.filterByNumericValues.length > 0) {
-      const { column, value, comparison } = filters.filterByNumericValues[0];
-      switch (comparison) {
-      case 'maior que': {
-        const newData = data.filter((option) => Number(option[column]) > Number(value));
-        setData(newData);
-        break;
-      }
-      case 'menor que': {
-        const newData = data.filter((option) => Number(option[column]) < Number(value));
-        setData(newData);
-        break;
-      }
-      case 'igual a': {
-        const newData = data.filter((option) => Number(option[column]) === Number(value));
-        setData(newData);
-        break;
-      }
-      default: console.log('');
-      }
-    }
-  }
-
-  // limpar filtros já selecionados - indexof + splice
-  useEffect(() => {
-    const option = optionColumns;
-    filters.filterByNumericValues.forEach(({ column }) => {
-      option.splice(option.indexOf(column), 1);
-      setOptionColumns(option);
-    });
-  }, [optionColumns, filters.filterByNumericValues]);
-
   const contextValue = {
     data,
     filters,
     filtered,
-    optionColumns,
     setFilters,
     setFiltered,
     setData,
     handleChange,
-    handleOption,
+    // handleOption,
   };
 
   return (

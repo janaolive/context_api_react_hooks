@@ -1,6 +1,6 @@
 // tentei incluir a lógica do filtro aqui também, mas não funcionou. Após pesquisa voltei ela para o componente
 
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 // requisito 5 e 6
@@ -25,11 +25,9 @@ function Filters() {
   const {
     data,
     setData,
-    handleOption,
     handleChange,
     filters,
     setFilters,
-    optionColumns,
   } = useContext(StarWarsContext);
 
   const [actualFilter, setActualFilter] = useState(initialFilters);
@@ -38,34 +36,6 @@ function Filters() {
     column: 'name',
     sort: 'ASC',
   });
-
-  const [objectFilters, setObjectFilters] = useState({
-    column: '',
-    comparison: '',
-    value: '',
-  });
-
-  // const handleFilterButton = () => {
-  //   setFilters(
-  //     { ...filters,
-  //       filterByNumericValues: [...filters.filterByNumericValues, objectFilters],
-  //     },
-  //   );
-  //   // handleOption();
-  // };
-
-  // useEffect(() => {
-  //   const button = async () => {
-  //     await handleOption();
-  //   };
-  //   button();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [filters]);
-
-  // const handleFilter = ({ target }) => {
-  //   const { name, value } = target;
-  //   setObjectFilters({ ...objectFilters, [name]: value });
-  // };
 
   const handleFilterNumeric = (e) => {
     const { value, name } = e.target;
@@ -140,7 +110,7 @@ function Filters() {
             onChange={ handleFilterNumeric }
           >
             {
-              optionColumns.map((option, index) => (
+              columnList.map((option, index) => (
                 <option
                   key={ index }
                   value={ option }
