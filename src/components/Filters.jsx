@@ -1,11 +1,11 @@
 // tentei incluir a lógica do filtro aqui também, mas não funcionou. Após pesquisa voltei ela para o componente
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Filters() {
   const {
-    handleOption, handleChange, filters, setFilters, optionColumns,
+    data, handleOption, handleChange, filters, setFilters, optionColumns,
   } = useContext(StarWarsContext);
 
   const [objectFilters, setObjectFilters] = useState({
@@ -20,18 +20,26 @@ function Filters() {
         filterByNumericValues: [...filters.filterByNumericValues, objectFilters],
       },
     );
-    handleOption();
+    // handleOption();
   };
+
+  useEffect(() => {
+    const button = async () => {
+      await handleOption();
+    };
+    button();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]);
 
   const handleFilter = ({ target }) => {
     const { name, value } = target;
     setObjectFilters({ ...objectFilters, [name]: value });
   };
 
-  // // loading
-  // if (data === undefined) {
-  //   return <h3> Carregando... </h3>;
-  // }
+  // loading
+  if (data === undefined) {
+    return <h3> Carregando... </h3>;
+  }
 
   return (
     <form>

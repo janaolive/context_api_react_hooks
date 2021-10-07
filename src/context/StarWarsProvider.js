@@ -25,12 +25,12 @@ function StarWarsProvider({ children }) {
 
   // função de requisição alterada após revisão de conteúdo, por achar menos verboso.
   // Plantão de revisão com ícaro - 17/09.
+  // auxilio da Paulinha para sair do looping infinito, pq misturei await e then na mesma função.
   useEffect(() => {
     const fetchPlanets = async () => {
       const planets = await fetch('https://swapi-trybe.herokuapp.com/api/planets/');
       const { results } = await planets.json();
       setData(results);
-      console.log(results);
     };
     fetchPlanets();
   }, []);

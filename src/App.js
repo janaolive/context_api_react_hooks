@@ -4,7 +4,7 @@ import './App.css';
 import StarWarsProvider from './context/StarWarsProvider';
 import Table from './components/Table';
 import Filters from './components/Filters';
-import FilterList from './components/FilterList';
+// import FilterList from './components/FilterList';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,7 +12,7 @@ function App() {
   return (
     <StarWarsProvider>
       <Filters />
-      <FilterList />
+      {/* <FilterList /> */}
       <Table />
     </StarWarsProvider>
   );
