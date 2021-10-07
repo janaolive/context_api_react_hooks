@@ -22,12 +22,7 @@ const ascending = 1;
 const descending = -1;
 
 function Filters() {
-  const {
-    data,
-    setData,
-    handleChange,
-    filters,
-    setFilters,
+  const { data, setData, handleChange, filters, setFilters,
   } = useContext(StarWarsContext);
 
   const [actualFilter, setActualFilter] = useState(initialFilters);
@@ -110,12 +105,12 @@ function Filters() {
             onChange={ handleFilterNumeric }
           >
             {
-              columnList.map((option, index) => (
+              columnList.map((col) => (
                 <option
-                  key={ index }
-                  value={ option }
+                  key={ col }
+                  value={ col }
                 >
-                  { option }
+                  { col }
                 </option>
               ))
             }

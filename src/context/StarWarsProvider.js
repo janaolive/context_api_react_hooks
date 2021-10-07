@@ -35,8 +35,8 @@ function StarWarsProvider({ children }) {
   // função, estado e contexto concluido após pesquisa no repositorio do colega Matheus Carvalho
   // https://github.com/tryber/sd-013-b-project-starwars-planets-search/tree/matheuscarvalhoscm-starwars-planets-search/src
   // porque estava com dificuldades para declarar o estado com duas chaves e passar a informação de lógica para o componente Filter.
-  function handleChange({ target }) {
-    const { value } = target;
+  function handleChange(e) {
+    const { value } = e.target;
     setFilters({ ...filters, filterByName: { name: value } });
   }
 
