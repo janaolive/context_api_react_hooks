@@ -54,17 +54,22 @@ function Filters() {
   //   // handleOption();
   // };
 
-  useEffect(() => {
-    const button = async () => {
-      await handleOption();
-    };
-    button();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters]);
+  // useEffect(() => {
+  //   const button = async () => {
+  //     await handleOption();
+  //   };
+  //   button();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [filters]);
 
-  const handleFilter = ({ target }) => {
-    const { name, value } = target;
-    setObjectFilters({ ...objectFilters, [name]: value });
+  // const handleFilter = ({ target }) => {
+  //   const { name, value } = target;
+  //   setObjectFilters({ ...objectFilters, [name]: value });
+  // };
+
+  const handleFilterNumeric = (e) => {
+    const { value, name } = e.target;
+    setActualFilter({ ...actualFilter, [name]: value });
   };
 
   const clearColumn = (column) => {
@@ -132,7 +137,7 @@ function Filters() {
             name="column"
             id="option-column"
             data-testid="column-filter"
-            onChange={ handleFilter }
+            onChange={ handleFilterNumeric }
           >
             {
               optionColumns.map((option, index) => (
@@ -154,7 +159,7 @@ function Filters() {
             name="comparison"
             id="option-comparison"
             data-testid="comparison-filter"
-            onChange={ handleFilter }
+            onChange={ handleFilterNumeric }
           >
             <option value="-">-</option>
             <option value="maior que">maior que</option>
@@ -171,7 +176,7 @@ function Filters() {
             name="value"
             id="option-value"
             data-testid="value-filter"
-            onChange={ handleFilter }
+            onChange={ handleFilterNumeric }
           />
         </label>
 
