@@ -96,7 +96,7 @@ function Filters() {
           />
         </label>
 
-        <label htmlFor="option-column">
+        <div className="option-column">
           Filtrar por:
           <select
             name="column"
@@ -115,10 +115,10 @@ function Filters() {
               ))
             }
           </select>
-        </label>
-        <button type="button" onClick={ clearFilter }>X</button>
+          <button type="button" onClick={ clearFilter }>X</button>
+        </div>
 
-        <label htmlFor="option-comparison">
+        <div classeName="comparison">
           Comparar por:
           <select
             name="comparison"
@@ -126,13 +126,12 @@ function Filters() {
             data-testid="comparison-filter"
             onChange={ handleFilterNumeric }
           >
-            <option value="-">-</option>
             <option value="maior que">maior que</option>
             <option value="menor que">menor que</option>
             <option value="igual a">igual a</option>
           </select>
-        </label>
-        <button type="button" onClick={ clearFilter }>X</button>
+          <button type="button" onClick={ clearFilter }>X</button>
+        </div>
 
         <label htmlFor="option-value">
           Filtrar Valor:
