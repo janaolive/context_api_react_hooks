@@ -12,7 +12,12 @@ function StarWarsProvider({ children }) {
       name: '',
     },
     filterByNumericValues: [],
+    order: {
+      column: 'name',
+      sort: 'ASC',
+    },
   });
+
   const [filtered, setFiltered] = useState();
 
   const [optionColumns, setOptionColumns] = useState([
