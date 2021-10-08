@@ -77,11 +77,6 @@ function Filters() {
     setData(sortedData);
   };
 
-  // loading
-  if (data === undefined) {
-    return <h3> Carregando... </h3>;
-  }
-
   return (
     <div>
       <form>
@@ -96,7 +91,7 @@ function Filters() {
           />
         </label>
 
-        <div className="option-column">
+        <div>
           Filtrar por:
           <select
             name="column"
@@ -118,7 +113,7 @@ function Filters() {
           <button type="button" onClick={ clearFilter }>X</button>
         </div>
 
-        <div classeName="comparison">
+        <div>
           Comparar por:
           <select
             name="comparison"
