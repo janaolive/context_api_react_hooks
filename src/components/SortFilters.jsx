@@ -10,13 +10,13 @@ const SortFilters = () => {
   const [sort, setSort] = useState('ASC');
 
   const handleRadioChange = ({ target }) => {
-    sortFilter(target.value);
+    setSort(target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setSort({ column, sort });
+    sortFilter({ column, sort });
   };
 
   return (

@@ -28,3 +28,4 @@ export default App;
 // https://github.com/tryber/sd-013-b-project-starwars-planets-search/tree/pedrospelta-starwars-project
 // https://github.com/tryber/sd-013-b-project-starwars-planets-search/tree/jonmorais-project-starwars-planets-search
 // https://github.com/tryber/sd-013-b-project-starwars-planets-search/tree/lucas-caribe-project-starwars-planets-search
+// https://github.com/tryber/sd-013-b-project-starwars-planets-search/blob/lucas-caribe-project-starwars-planets-search/src/components/SortFilters.js
